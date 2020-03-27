@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{Sale.Salename}}</title>
+    <!--custom header start--><script>if (!(location.search + '').match(/\bmobile=0\b/) && /Android|webOS|iPhone|Windows Phone|iPod|BlackBerry|SymbianOS/i.test(navigator.userAgent)) {location.href = location.href.substring(0, location.href.lastIndexOf('/')) + '/mobile/'}</script><!--custom header end-->
+    <link rel="stylesheet" href="/static/css/salesinfo.css" />
+    <script type="text/javascript" src="/static/css/salesinfo.js"></script>
+	<script type="text/javaScript">
+function qtyUpdate(kind){
+    var f = document.form1;
+    var c = f.qty.value;
+    if(kind == "up"){
+        c++;
+    }else if(kind == "down"){
+        if(c > 1) c--;
+    }
+    f.qty.value = c;
+}
+</script>
+    <!--[if IE 6]>
+    <script> try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} </script>
+    <![endif]-->
+  </head>
+  <body id="w-body-aaaa" data-type="body" class="p-175439 n-widget w-body">
+    <div id="w-titlebox-aaab" data-type="titlebox" class="n-widget w-titlebox t-titlebox-default">
+      <div id="w-titlebox-aaab-title" class="w-titlebox-title t-titlebox-default-title">
+        <i class="middle"></i>
+        <h2><i></i>商品详情</h2>
+      </div>
+      <div id="w-area-aaac" data-type="area" class="p-175439 n-widget w-area w-titlebox-content t-titlebox-default-content">
+      </div>
+    </div>
+    <div id="w-columnbox-aaad" data-type="columnbox" class="n-widget w-columnbox">
+        <div class="w-col" style="width:50%;">
+        <div id="w-area-aaae" data-type="area" class="p-175439 n-widget w-area">
+          <div id="w-image-aaaf" data-type="image" class="n-widget w-image">
+            <img src="/static/images/44e405eb3a206d538abd62ee190384ff_fullsize.jpg" />
+          </div>
+        </div>
+        </div>
+        <div class="w-col" style="width:50%;" align = 'right'>
+        <div id="w-area-aaag" data-type="area" class="p-175439 n-widget w-area">
+          <div id="w-menu-aaah" data-type="menu" class="n-widget w-menu t-menu-default">
+          <div class="w-menu-container" data-menu-type="h-down"><ul class="w-menu-list"><li class="w-menu-item w-menu-item-first active">
+		  <a href="/">首页</a>
+		  {%if Logged%}
+		  </li><li class="w-menu-divider"><span class="w-menu-divider-item"></span></li><li class="w-menu-item"><font>{{Username}}</font></li>
+		  <li class="w-menu-divider"><span class="w-menu-divider-item"></span></li><li class="w-menu-item w-menu-item-last"><a href="/logout">登出</a></li></ul></div>
+		  {%else%}
+		  </li><li class="w-menu-divider"><span class="w-menu-divider-item"></span></li><li class="w-menu-item"><a href="/login/{{Sale.Salenum}}">登录</a></li>
+		  <li class="w-menu-divider"><span class="w-menu-divider-item"></span></li><li class="w-menu-item w-menu-item-last"><a href="/newaccount">注册</a></li></ul></div>
+          {%endif%}
+		  </div>
+        </div>
+        </div>
+    </div>
+    <div id="w-columnbox-aaai" data-type="columnbox" class="n-widget w-columnbox">
+        <div class="w-col" style="width:25%;">
+        <div id="w-area-aaaj" data-type="area" class="p-175439 n-widget w-area">
+          <div id="w-image-aaak" data-type="image" class="n-widget w-image">
+            <img src="/static/images/{{Sale.Salenum}}.png"></img>
+          </div>
+        </div>
+        </div>
+        <div class="w-col" style="width:75%;">
+        <div id="w-area-aaal" data-type="area" class="p-175439 n-widget w-area">
+          <div id="w-area-aaam" data-type="area" class="p-175439 n-widget w-area">
+			<table border="1" align = "center" style = 'font-size:17px'>
+			<tr align = "center">
+			<th width = "100">商品名：</th>
+			<th width = "450">{{Sale.Salename}}</th>
+			</tr>
+			<tr align = "center">
+			<th width = "100">单&nbsp&nbsp&nbsp价：</th>
+			<th width = "450">￥ {{Sale.Price}}</th>
+			</tr>
+			<tr align = "center">
+			<th width = "100">库&nbsp&nbsp&nbsp存：</th>
+			<th width = "450">{{Sale.Numofstore}}</th>
+			</tr>
+			<tr align = "center">
+			<th width = "100">标&nbsp&nbsp&nbsp签：</th>
+			<th width = "450">{{Sale.Type}}</th>
+			</tr>
+			<tr align = "center">
+			<th width = "100">品牌/产地：</th>
+			<th width = "450">{{Sale.Brand}}/{{Sale.Pro_place}}</th>
+			</tr>
+			<tr align = "center">
+			<th width = "100">型号：</th>
+			<th width = "450">{{Sale.Size}}</th>
+			</tr>
+			<tr align = "center">
+			<th width = "100">购买数量：</th>
+			<th width = "450">
+			<FORM  name="form1" method="post">
+			{% csrf_token %}
+			<TABLE border=0 cellSpacing=0 cellPadding=0>
+			<TR>
+			<TD rowSpan=2><INPUT value=1 readOnly size=5 name='qty'></TD>
+			<TD rowSpan=2 width=3></TD>
+			<TD><A href="javascript:qtyUpdate('up')"><IMG src="/static/images/btn_up.png" width=11 height=8></A></TD>
+			</TR>
+			<TR>
+			<TD align=right><A href="javascript:qtyUpdate('down')"><IMG src="/static/images/btn_down.png" width=11 height=8></A></TD>
+			</TR>
+			</TABLE>
+			</th>
+			</tr>
+			</table>
+          </div>
+          <div id="w-area-aaan" data-type="area" class="p-175439 n-widget w-area">
+            <div id="w-columnbox-aaao" data-type="columnbox" class="n-widget w-columnbox">
+                <div class="w-col" style="width:33%;">
+                <div id="w-area-aaap" data-type="area" class="p-175439 n-widget w-area">
+                  <div id="w-button-aaaq" data-type="button" class="n-widget w-button t-button-default t-button-default-663399">
+				  {%if Carred%}
+				  <class="w-button-container w-button-fixed" id="w-button-aaaq-b">
+                    <span class="w-button-text"><i class="middle"></i><input type="submit" value="再次购买"  style="width:100px;height:30px" onclick="addAction()"></span><i class="w-button-right"></i>
+				  {%else%}
+                    <class="w-button-container w-button-fixed" id="w-button-aaaq-b">
+                    <span class="w-button-text"><i class="middle"></i><input type="submit" value="加入购物车"  style="width:100px;height:30px" onclick="addAction()"></input></span><i class="w-button-right"></i>
+                    
+				  {%endif%}
+                  </div>
+                </div>
+                </div>
+                <div class="w-col" style="width:33%;">
+                <div id="w-area-aaar" data-type="area" class="p-175439 n-widget w-area">
+                  <div id="w-button-aaas" data-type="button" class="n-widget w-button t-button-default t-button-default-663399">
+                    <class="w-button-container w-button-fixed" id="w-button-aaas-b">
+                    <span class="w-button-text"><i class="middle"></i><input type="button" value="立即购买"  style="width:100px;height:30px" onclick="buynowAction()"></input></span><i class="w-button-right"></i>
+                  </div>
+                </div>
+                </div>
+				<div class="w-col" style="width:33%;">
+                <div id="w-area-aaap" data-type="area" class="p-175439 n-widget w-area">
+                  <div id="w-button-aaaq" data-type="button" class="n-widget w-button t-button-default t-button-default-663399">
+                    <class="w-button-container w-button-fixed" id="w-button-aaaq-b">
+                    <span class="w-button-text"><i class="middle"></i><input type="submit" name="nocalnum" value="看看购物车"  style="width:100px;height:30px" onclick="payAction()"></input></span><i class="w-button-right"></i>
+                  </div>
+                </div>
+                </div>
+            </div>
+			</FORM>
+          </div>
+        </div>
+		{%if Carred == "ok"%}
+		<font size='5px' color='red'>已加入 {{Buynum}} 件商品到购物车</font>
+		{%elif Carred == "buytoomany"%}
+		<font size='5px' color='red'>您买的太多了，库存不够了！</font>
+		{%endif%}
+        </div>
+    </div>
+  <!--custom footer start-->
+<!--custom footer end-->
+<script type="text/javascript">
+function addAction(){
+    document.form1.action="/salesinfo/{{Sale.Salenum}}/carred";
+    document.form1.submit();
+}
+ 
+function buynowAction(){
+    document.form1.action="/shoppingcar/{{Sale.Salenum}}";
+    document.form1.submit();
+}
+ 
+function payAction(){
+	var f = document.form1;
+	f.qty.value = 0;
+    document.form1.action="/shoppingcar/{{Sale.Salenum}}";
+    document.form1.submit();
+}
+</script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>订单</title>
+    <link rel="stylesheet" href="/static/css/shoppingcar.css" />
+    <script src="/static/css/shoppingcar.js"></script>
+    <!--[if IE 6]>
+    <script> try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} </script>
+    <![endif]-->
+  </head>
+  <body id="w-body-aaaa" data-type="body" class="p-175439 n-widget w-body">
+    <div id="w-titlebox-aaab" data-type="titlebox" class="n-widget w-titlebox t-titlebox-default">
+      <div id="w-titlebox-aaab-title" class="w-titlebox-title t-titlebox-default-title">
+        <i class="middle"></i>
+        <h2>完善订单</h2>
+      </div>
+      <div id="w-area-aaac" data-type="area" class="p-175439 n-widget w-area w-titlebox-content t-titlebox-default-content">
+      </div>
+    </div>
+    <div id="w-columnbox-aaad" data-type="columnbox" class="n-widget w-columnbox">
+        <div class="w-col" style="width:50%;">
+        <div id="w-area-aaae" data-type="area" class="p-175439 n-widget w-area">
+          <div id="w-image-aaaf" data-type="image" class="n-widget w-image">
+            <img src="/static/images/44e405eb3a206d538abd62ee190384ff_fullsize.jpg" />
+          </div>
+        </div>
+        </div>
+        <div class="w-col" style="width:50%;" align = 'right'>
+        <div id="w-area-aaag" data-type="area" class="p-175439 n-widget w-area">
+          <div id="w-menu-aaah" data-type="menu" class="n-widget w-menu t-menu-default">
+          <div class="w-menu-container" data-menu-type="h-down">
+		  <ul class="w-menu-list">
+		  <li class="w-menu-item w-menu-item-first">
+		  <a href="/">首页</a>
+		  </li><li class="w-menu-divider"><span class="w-menu-divider-item"></span></li><li class="w-menu-item"><a href="/userinfo">{{Username}}</a></li>
+		  <li class="w-menu-divider"><span class="w-menu-divider-item"></span></li><li class="w-menu-item w-menu-item-last"><a href="/logout">登出</a></li>
+		  </ul>
+		  </div>
+          </div>
+        </div>
+        </div>
+    </div>
+	
+    <div id="w-area-aaai" data-type="area" class="p-175439 n-widget w-area">
+      <div id="w-columnbox-aaaj" data-type="columnbox" class="n-widget w-columnbox">
+          <div class="w-col" style="width:100%;">
+          <div id="w-area-aaam" data-type="area" class="p-175439 n-widget w-area">
+		  <h2>商品清单</h2>
+		  <br/><br/>
+		  {%if Error1 == True%}
+		  <h3 style = "color:red">未购买商品！！！</h3>
+		  <br/><br/>
+		  {%endif%}
+		  <table id="tab" border="1" align = "center" style = 'font-size:17px'>
+		  <tbody>
+			<tr align = "center"  height = '40'>
+			<th width = "100">商品号</th>
+			<th width = "310">商品名</th>
+			<th width = "100">型号</th>
+			<th width = "100">单价</th>
+			<th width = "100">购买数量</th>
+			</tr>
+			{%for i in Shoppingcar%}
+			<tr align = "center"  height = '40'>
+			<td width = "100">{{i.Sale.Salenum}}</td>
+			<td width = "310">{{i.Sale.Salename}}</td>
+			<td width = "100">{{i.Sale.Weight}}</td>
+			<td width = "100" class = "price">{{i.Sale.Price}}</td>
+			<td width = "100" class = "num">{{i.Num}}</td>
+			</tr>
+			{%endfor%}
+		  </tbody>
+		  </table>
+          </div>
+		  
+		  <div id="w-area-aaam" data-type="area" class="p-175439 n-widget w-area">
+		  <h2>选择收货地址&nbsp&nbsp&nbsp<a href = '/newaddress/{{Account.Sqe}}/1'>去新建地址</a></h2>
+		  <br/><br/>
+		  {%if Error == True%}
+		  <h3 style = "color:red">未选择收货地址！！！</h3>
+		  <br/><br/>
+		  {%endif%}
+		  <table id="tab" border="1" align = "center" style = 'font-size:17px'>
+		  <tbody>
+			<tr align = "center"  height = '40'>
+			<th width = "60">选择</th>
+			<th width = "330">地址</th>
+			<th width = "80">收货人</th>
+			<th width = "140">电话</th>
+			<th width = "100">邮编</th>
+			</tr>
+			<form name="form1" method = 'post'>
+			{% csrf_token %}
+			{%for i in Address%}
+			<tr align = "center"  height = '40'>
+			{%if Arg == i.Order%}
+			<td width = "60">已使用</td>
+			{%else%}
+			<td width = "50"> <a href='/order/{{i.Order}}'>使用</a></td>
+			{%endif%}
+			<td width = "330">{{i.Province}}{{i.City}}{{i.Address}}</td>
+			<td width = "80">{{i.Name}}</td>
+			<td width = "140" class = "price">{{i.Phone}}</td>
+			<td width = "100" class = "num">{{i.Postcode}}</td>
+			</tr>
+			{%endfor%}
+			</form>
+		  </tbody>
+		  </table>
+          </div>
+          </div>
+      </div>
+    </div>
+    <div id="w-area-aaan" data-type="area" class="p-175439 n-widget w-area">
+      <div id="w-columnbox-aaao" data-type="columnbox" class="n-widget w-columnbox">
+          <div class="w-col" style="width:50%;">
+          <div id="w-area-aaap" data-type="area" class="p-175439 n-widget w-area">
+          </div>
+          </div>
+          <div class="w-col" style="width:50%;" align = 'right'>
+          <div id="w-area-aaaq" data-type="area" class="p-175439 n-widget w-area">
+		  <b style="font-size:25px;color:black;font-family:'华文新魏'">总价：￥{{Sum}}</b>
+		  <br/><br/>
+		  <form name="form1" method="post">
+		  {% csrf_token %}
+		  <input type='submit' width = '100px' height='50px' value='现在支付' style="font-size:20px;"></input>&nbsp&nbsp&nbsp&nbsp
+		  </form>
+		  
+          </div>
+          </div>
+      </div>
+    </div>
+  <!--custom footer start-->
+<!--custom footer end-->
+  </body>
+</html>
